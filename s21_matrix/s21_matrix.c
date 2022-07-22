@@ -139,7 +139,7 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
     
     for(int i = 0; i < A->rows; i++) {
         for(int k = 0; k < A-> columns; k++) {
-            A->matrix[i][k] = s21_minor();  
+            // A->matrix[i][k] = s21_minor();  
         }
     }
 }
@@ -161,10 +161,8 @@ int s21_determinant(matrix_t *A, double *result) {
 //нужно сделать превй цикл который будет изначально пердавать i and k in cycle и заполняет матрицу результата
 //
 // 
-double s21_matrix_reduction(int str, int i, int k, matrix_t matrix_lees) {
-    double minor = 0;
-    double algb = 0;
-    s21_create_matrix(str, str, &matrix_lees); // creat less matrix for minor it is mast in сycle
+void s21_matrix_reduction(int str, int i, int k, matrix_t matrix_lees) {
+    s21_create_matrix(str, str, &matrix_lees); // creat less matrix for minor it is must be in сycle // а не даляю ли я свою основную матрицу такиеми дейтсиями когда передаю ее арес 
     for(int minor_i = 0; minor_i < str; minor_i++) {
         for(int minor_k = 0; minor_k < str; minor_k++) {
             if(minor_i != i && minor_k != k) {
@@ -172,13 +170,14 @@ double s21_matrix_reduction(int str, int i, int k, matrix_t matrix_lees) {
             }
         }
     } // minor должен возвращаться в таблицу с кторой начинался отсчет ..
-    if(matrix_lees.rows < 1) {
+    double minor ;
+    double algb ;
+    if (matrix_lees.rows < 1) {
         minor = matrix_lees.matrix[0][0] * matrix_lees.matrix[1][1] - matrix_lees.matrix[1][0] * matrix_lees.matrix[1][0];
-        algb = pow(-1, (i+k)); 
-        algb *= minor;
-        return algb;
+        algb = pow(-1, (i+k)) * minor;    
     }
-    minor += s21_matrix_reduction(str - 1, i - 1, k - 1, matrix_lees);
+    // if (matrix_lees.rows > 1) algb += s21_matrix_reduction(str - 1, i - 1, k - 1, matrix_lees);
+    // return algb;
 }
 
 // Алгебраическим дополнением элемента матрицы является значение минора умноженное на -1^(i+j).

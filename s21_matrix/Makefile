@@ -21,7 +21,7 @@ $(OBJECT): $(SCORE)
 	$(GCC) $(SCORE) -c
 
 s21_%.h: *.c
-	sed -i '/generated/,$$d' $@
+	sed -i '' '/generated/,$$d' $@
 	echo "//  generated_by_makefile" >> $@
 	cat s21_*.c | grep -E "^\w+.*[)] [{]" | grep -v "main(" | sed 's/ {/;/' >> $@
 
@@ -39,7 +39,7 @@ gcov_report: s21_matrix.a
 	open ./report/index.html
 
 debug : 
-	$(GCC) main.c s21_matrix.c -g
+	$(GCC) main.c s21_matrix_reduction.c -g
 #lo:
 #	for i in `seq 100 $(OP)`;	do ./test; done;
 
