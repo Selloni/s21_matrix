@@ -30,10 +30,9 @@ double s21_less_matrix(int row, int col, matrix_t *A) {
     if (A->rows  == 2) {
       res = A->matrix[0][0] * A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
       res += pow(-1, (m_row + m_col)) * res;
-
-      for (int i = 0;  i < A->columns; i++) {
-        res += s21_less_matrix(0, i, A);
-      }
+    }
+    if (A->rows > 2) {
+      
     }
   }
 }
@@ -54,19 +53,19 @@ int s21_determinant(matrix_t *A, double *result) {
   return err_status;
 }
 
-double s21_minor (matrix_t *A) {
-    double res = 0;
-    if (A->rows == 1) {
-      res = A->matrix[0][0];
-    }
-    if (A->rows  == 2) {
-      res = A->matrix[0][0] * A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
-    }
-      for (int i = 0; A->columns; i++) {
-        s21_less_matrix(0, i, A);
+// double s21_minor (matrix_t *A) {
+//     double res = 0;
+//     if (A->rows == 1) {
+//       res = A->matrix[0][0];
+//     }
+//     if (A->rows  == 2) {
+//       res = A->matrix[0][0] * A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
+//     }
+//       for (int i = 0; A->columns; i++) {
+//         s21_less_matrix(0, i, A);
 
-        }
-}
+//         }
+// }
 
 
 
