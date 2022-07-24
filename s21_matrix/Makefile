@@ -2,33 +2,36 @@ CC = gcc
 GCC = $(CC) -Wall -Wextra -Werror
 OBJECT = s21_matrix.o
 SCORE = s21_matrix.c
-TEST_LIBS = -lcheck
+TEST_LIBS = -lcheck -lm -lpthread
+
+.PHONY: all clean test s21_matrix.a gcov_report
+
 
 all: clean s21_matrix.a
 
 test: s21_matrix.a s21_matrix_test.o
-	$(CC) s21_matrix_test.o s21_matrix.a $(TEST_LIBS) -o test
+	$(CC) $(OBJECTS) s21_matrix_test.o s21_matrix.a $(TEST_LIBS) -o test
 	./test
 
 s21_matrix_test.o:
 	$(GCC) s21_matrix_test.c -c
 
-s21_matrix.a: $(OBJECT)
-	ar -rcs s21_matrix.a $(OBJECT)
+s21_matrix.a: s21_matrix.o
+	ar rcs s21_matrix.a $(OBJECT)
 
 
-$(OBJECT): $(SCORE)
+s21_matrix.o: $(SCORE)
 	$(GCC) $(SCORE) -c
 
-s21_%.h: *.c
-	sed -i '' '/generated/,$$d' $@
-	echo "//  generated_by_makefile" >> $@
-	cat s21_*.c | grep -E "^\w+.*[)] [{]" | grep -v "main(" | sed 's/ {/;/' >> $@
+# s21_%.h: *.c
+# 	sed -i '' '/generated/,$$d' $@
+# 	echo "//  generated_by_makefile" >> $@
+# 	cat s21_*.c | grep -E "^\w+.*[)] [{]" | grep -v "main(" | sed 's/ {/;/' >> $@
 
 clean:
 	rm -rf *.o
 	rm -rf test
-	rm -rf a.*
+	rm -rf *.a
 
 gcov_report: s21_matrix.a
 	$(GCC)  --coverage s21_matrix_test.c s21_matrix.c  s21_matrix.a $(TEST_LIBS) -o gcov_test
