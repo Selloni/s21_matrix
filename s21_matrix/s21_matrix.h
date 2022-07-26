@@ -37,6 +37,7 @@ int s21_calc_complements(matrix_t *A, matrix_t *result);
 int s21_determinant(matrix_t *A, double *result);
 double s21_get_determinant(matrix_t *A);
 void s21_get_matrix(int row, int col, matrix_t *A, matrix_t *result);
+int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 void s21_fill(matrix_t *matrix, double value);
 
 
