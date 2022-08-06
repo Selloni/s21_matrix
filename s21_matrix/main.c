@@ -7,8 +7,9 @@ int main ()
 // srand(time(NULL));   // Initialization, should only be called once.
 // int r = rand();      // Returns a pseudo-random integer between 0 and RAND
     matrix_t A, result;
+    double  res;
     // A.count = 0;
-    int i, k;
+//    int i, k;
     int n = 3, d = n;
     double minor = 0;
     // int count = 0;
@@ -22,14 +23,24 @@ int main ()
     // s21_create_matrix (3, 3, &result);
     // s21_create_matrix(3, 3, &A);
     // s21_create_matrix(3, 3, &B);
-    for( i = 0; i < n; i++) {
-        for( k = 0; k < d; k++) {
-            A.matrix[i][k] = rand()%20;
-            printf("%f ",A.matrix[i][k]);
-            // B.matrix[i][k] = k;
-        }
-        printf("\n");
-    }
+    A.matrix [0][0] = 1;
+    A.matrix [0][1] = 2;
+    A.matrix [0][2] = 3;
+    A.matrix [1][1] = 4;
+    A.matrix [1][1] = 5;
+    A.matrix [1][2] = 6;
+    A.matrix [2][0] = 7;
+    A.matrix [2][1] = 8;
+    A.matrix [2][2] = 9;
+
+//    for( i = 0; i < n; i++) {
+//        for( k = 0; k < d; k++) {
+//            A.matrix[i][k] = rand()%20;
+//            printf("%f ",A.matrix[i][k]);
+//            // B.matrix[i][k] = k;
+//        }
+//        printf("\n");
+//    }
     // for( i = 0; i < 3; i++) {
     //     for( k = 0; k < 3; k++) {
     //         printf("%f ",A.matrix[i][k]);
@@ -38,9 +49,9 @@ int main ()
     // }
     printf("___.____.___.__\n");
     // for( i = 0; i < n; i++) {
-        for(k = 0; k < d; k++) {
+        for(int k = 0; k < d; k++) {
             // A.matrix[i][k] = s21_matrix_reduction(A.rows, i, k, result);
-            minor = s21_less_matrix(0, k, &A);
+            minor = s21_determinant(&A, &res);
             
             // result.matrix[i][k] = s21_matrix_reduction(A.rows, i, k, &A, count);
             printf("minor%f\n", minor);

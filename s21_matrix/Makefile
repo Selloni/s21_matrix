@@ -32,6 +32,7 @@ clean:
 	rm -rf *.o
 	rm -rf test
 	rm -rf *.a
+	rm -rf *.out
 
 gcov_report: s21_matrix.a
 	$(GCC)  --coverage s21_matrix_test.c s21_matrix.c  s21_matrix.a $(TEST_LIBS) -o gcov_test
@@ -42,7 +43,7 @@ gcov_report: s21_matrix.a
 	open ./report/index.html
 
 debug : 
-	$(GCC) main.c s21_matrix_reduction.c -g
+	$(GCC) main.c s21_determinant.c  s21_create_matrix.c -g
 #lo:
 #	for i in `seq 100 $(OP)`;	do ./test; done;
 
