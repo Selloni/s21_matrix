@@ -1,4 +1,4 @@
-#include "s21_crearte_matrix
+#include "s21_matrix.h"
 
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
     int err_status = OK;

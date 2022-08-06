@@ -16,6 +16,7 @@ test: s21_matrix.a s21_matrix_test.o
 s21_matrix_test.o:
 	$(GCC) s21_matrix_test.c -c
 
+
 s21_matrix.a: s21_matrix.o
 	ar rcs s21_matrix.a $(OBJECT)
 
@@ -43,7 +44,7 @@ gcov_report: s21_matrix.a
 	open ./report/index.html
 
 debug : 
-	$(GCC) main.c s21_determinant.c  s21_create_matrix.c -g
+	$(GCC) main.c s21_determinant.c  s21_create_matrix.c s21_calc_complements.c -g
 #lo:
 #	for i in `seq 100 $(OP)`;	do ./test; done;
 
@@ -65,3 +66,9 @@ check: s21_matrix.a
 install lcov:
 	curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
 	brew install lcov
+
+
+git:
+	git add .
+	git commit -m "matrix"
+	git push
