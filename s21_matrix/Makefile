@@ -34,6 +34,7 @@ clean:
 	rm -rf test
 	rm -rf *.a
 	rm -rf *.out
+	rm -rf *.gcda *.gcno gcov_test* *.cfg
 
 gcov_report: s21_matrix.a
 	$(GCC)  --coverage s21_matrix_test.c s21_matrix.c  s21_matrix.a $(TEST_LIBS) -o gcov_test
@@ -63,9 +64,9 @@ check: s21_matrix.a
 	$(CC) test.o s21_matrix.a $(TEST_LIBS) -o test
 	CK_FORK=no leaks --atExit -- ./test
 
-install lcov:
-	curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
-	brew install lcov
+# install lcov:
+# 	curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
+# 	brew install lcov
 
 
 git:
