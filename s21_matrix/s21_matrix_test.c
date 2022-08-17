@@ -168,13 +168,21 @@ START_TEST(test_s21_eq_matrix) {
       matrix3.matrix[i][j] = count + 1.01234567;
     }
   }
+
   int result = s21_eq_matrix(&matrix, &matrix2);
+
   ck_assert_int_eq(result, 1);
+
   matrix2.matrix[2][2] += 0.0000009;
+
   result = s21_eq_matrix(&matrix, &matrix2);
+
   ck_assert_int_eq(result, 0);
+
   result = s21_eq_matrix(&matrix, &matrix3);
+
   ck_assert_int_eq(result, 0);
+
   s21_remove_matrix(&matrix);
   s21_remove_matrix(&matrix2);
   s21_remove_matrix(&matrix3);
